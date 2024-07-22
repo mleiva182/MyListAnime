@@ -9,19 +9,18 @@ import kotlinx.coroutines.withContext
  * From: com.mleiva.mylistanime.data.repository
  * Creted by: Marcelo Leiva on 17-04-2024 at 18:50
  ***/
-class AnimesRepository {
+class AnimesRepository(private val animesService: AnimesService) {
 
     suspend fun fetchAnimes(): List<Anime> = withContext(Dispatchers.IO) {
-        AnimesClient.instance.fetchAnimes()
+        animesService.fetchAnimes()
             .results
             .map {
                 it.toDomainModel()
             }
     }
 
-
     suspend fun findInfoAnimeById(id: Int): Anime =
-        AnimesClient.instance.fetchInfoAnime(id).toDomainModel()
+        animesService.fetchInfoAnime(id).toDomainModel()
 
 }
 

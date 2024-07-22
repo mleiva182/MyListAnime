@@ -31,7 +31,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
 import com.mleiva.mylistanime.data.model.Anime
+import com.mleiva.mylistanime.ui.common.LoadingProgressIndicator
 import com.mleiva.mylistanime.ui.screens.Screen
 
 /***
@@ -70,14 +72,7 @@ fun HomeScreen(
             val state = vm.uiState
 
             if (state.loading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                LoadingProgressIndicator(modifier = Modifier.padding(padding))
             }
 
             LazyVerticalGrid(
@@ -121,3 +116,4 @@ fun AnimeItem(anime: Anime, onClick: () -> Unit) {
         )
     }
 }
+

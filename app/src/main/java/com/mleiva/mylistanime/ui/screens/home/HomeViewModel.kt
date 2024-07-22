@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mleiva.mylistanime.data.model.Anime
+import com.mleiva.mylistanime.data.repository.AnimesClient
 import com.mleiva.mylistanime.data.repository.AnimesRepository
 import kotlinx.coroutines.launch
 
@@ -19,7 +20,7 @@ class HomeViewModel: ViewModel() {
     var uiState by mutableStateOf(UiState())
         private set
 
-    private val repository: AnimesRepository = AnimesRepository()
+    private val repository: AnimesRepository = AnimesRepository(AnimesClient.instance)
 
     fun onUiReady() {
         viewModelScope.launch {

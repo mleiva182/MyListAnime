@@ -22,13 +22,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.mleiva.mylistanime.R
+import com.mleiva.mylistanime.ui.common.LoadingProgressIndicator
 import com.mleiva.mylistanime.ui.screens.Screen
 
 /***
@@ -68,14 +68,7 @@ fun InfoAnimeScreen(
         ) { padding ->
 
             if (state.loading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+                LoadingProgressIndicator(modifier = Modifier.padding(padding))
             }
 
             state.anime?.let { anime ->
