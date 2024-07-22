@@ -13,12 +13,15 @@ data class RemoteResult(
 data class Data(
     @SerialName("mal_id")
     val malId: Int = 0,
+    @SerialName("images")
     val images: Images = Images(Jpg()),
     @SerialName("title")
     val title: String = "",
     @SerialName("episodes")
     val episodes: Int = 0,
+    @SerialName("broadcast")
     val broadcast: Broadcast = Broadcast(),
+    @SerialName("genres")
     val genres: List<Genre> = emptyList(),
     )
 

@@ -24,9 +24,10 @@ class InfoAnimeViewModel(private val id: Int): ViewModel() {
     data class UiState(
         val loading: Boolean = false,
         val anime: Anime? = null
+        //val anime: Anime = Anime(0, Images(Jpg()),"",0, Broadcast(), emptyList() )
     )
 
-    init {
+    fun onUiReady() {
         viewModelScope.launch {
             state = UiState(loading = true)
             state = UiState(loading = false, anime = repository.findInfoAnimeById(id))

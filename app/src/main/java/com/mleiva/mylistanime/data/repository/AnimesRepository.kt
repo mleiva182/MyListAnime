@@ -19,7 +19,9 @@ class AnimesRepository {
             }
     }
 
-    suspend fun findInfoAnimeById(id: Int): Anime = AnimesClient.instance.fetchInfoAnime(id).toDomainModel()
+    suspend fun findInfoAnimeById(id: Int): Anime =
+        AnimesClient.instance.fetchInfoAnime(id).toDomainModel()
+
 
 
 }

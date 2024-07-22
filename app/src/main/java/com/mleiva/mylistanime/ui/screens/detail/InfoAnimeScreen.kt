@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -39,13 +40,18 @@ fun InfoAnimeScreen(
     vm: InfoAnimeViewModel,
     onBack: () -> Unit
 ) {
-    val state = vm.state
+
+    LaunchedEffect(true){
+        vm.onUiReady()
+    }
+
 
     Screen {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = state.anime?.name ?: "") },
+                    //title = { Text(text = state.anime?.name ?: "") },
+                    title = { Text(text = "TEST") },
                     navigationIcon = {
                         IconButton(onClick = onBack) {
                             Icon(
@@ -57,6 +63,8 @@ fun InfoAnimeScreen(
                 )
             },
         ) { padding ->
+
+            val state = vm.state
 
             if (state.loading) {
                 Box(

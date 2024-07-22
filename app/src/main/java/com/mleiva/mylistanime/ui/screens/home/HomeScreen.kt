@@ -42,7 +42,7 @@ import com.mleiva.mylistanime.ui.screens.Screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onMovieClick: (Anime) -> Unit,
+    onAnimeClick: (Anime) -> Unit,
     vm: HomeViewModel = viewModel()
 ) {
 
@@ -88,7 +88,7 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = 4.dp)
             ) {
                 items(state.animes, key = { it.id }) {
-                    AnimeItem(anime = it) { onMovieClick(it) }
+                    AnimeItem(anime = it) { onAnimeClick(it) }
                 }
             }
         }

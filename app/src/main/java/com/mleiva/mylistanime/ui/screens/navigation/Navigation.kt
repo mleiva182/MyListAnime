@@ -22,7 +22,7 @@ fun Navigation() {
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreen(onMovieClick = { anime ->
+            HomeScreen(onAnimeClick = { anime ->
                 navController.navigate("detail/${anime.id}")
             })
         }

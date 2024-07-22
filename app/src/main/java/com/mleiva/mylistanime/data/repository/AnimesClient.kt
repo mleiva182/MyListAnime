@@ -24,7 +24,7 @@ object AnimesClient {
 
     val instance = Retrofit.Builder()
         .baseUrl("https://api.jikan.moe/v4/")
-        .client(okHttpClient)
+        //.client(okHttpClient)
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()
         .create<AnimesService>()
