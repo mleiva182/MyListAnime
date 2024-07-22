@@ -13,8 +13,8 @@ interface AnimesService {
     @GET("anime")
     suspend fun fetchAnimes(): RemoteResult
 
-    @GET("anime/{id}/full")
-    suspend fun fetchInfoAnime(@Path("id") id: Int): Data
+    @GET("anime/{id}")
+    suspend fun fetchInfoAnime(@Path("id") id: Int): RemoteResultData
 
 
 }

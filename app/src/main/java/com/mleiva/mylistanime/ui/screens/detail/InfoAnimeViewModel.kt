@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mleiva.mylistanime.data.model.Anime
 import com.mleiva.mylistanime.data.repository.AnimesRepository
+import com.mleiva.mylistanime.data.repository.Broadcast
+import com.mleiva.mylistanime.data.repository.Images
+import com.mleiva.mylistanime.data.repository.Jpg
 import kotlinx.coroutines.launch
 
 /***
@@ -24,10 +27,9 @@ class InfoAnimeViewModel(private val id: Int): ViewModel() {
     data class UiState(
         val loading: Boolean = false,
         val anime: Anime? = null
-        //val anime: Anime = Anime(0, Images(Jpg()),"",0, Broadcast(), emptyList() )
     )
 
-    fun onUiReady() {
+    fun onUiReady(){
         viewModelScope.launch {
             state = UiState(loading = true)
             state = UiState(loading = false, anime = repository.findInfoAnimeById(id))

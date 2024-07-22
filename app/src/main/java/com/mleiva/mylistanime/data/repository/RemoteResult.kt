@@ -1,6 +1,7 @@
 package com.mleiva.mylistanime.data.repository
 
 
+import com.mleiva.mylistanime.data.model.Anime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -8,6 +9,22 @@ import kotlinx.serialization.Serializable
 data class RemoteResult(
     @SerialName("data") val results: List<Data>
 )
+
+@Serializable
+data class RemoteResultData(
+    @SerialName("data") val results: Data
+) {
+    fun toDomainModel(): Anime{
+        return Anime(
+            id = results.malId,
+            images = results.images,
+            name = results.title,
+            episodes = results.episodes,
+            broadcast = results.broadcast,
+            genres = results.genres
+        )
+    }
+}
 
 @Serializable
 data class Data(

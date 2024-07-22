@@ -10,6 +10,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -45,13 +47,13 @@ fun InfoAnimeScreen(
         vm.onUiReady()
     }
 
+    val state = vm.state
 
     Screen {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    //title = { Text(text = state.anime?.name ?: "") },
-                    title = { Text(text = "TEST") },
+                    title = { Text(text = state.anime?.name ?: "") },
                     navigationIcon = {
                         IconButton(onClick = onBack) {
                             Icon(
@@ -61,17 +63,16 @@ fun InfoAnimeScreen(
                         }
                     }
                 )
-            },
-        ) { padding ->
 
-            val state = vm.state
+            }
+        ) { padding ->
 
             if (state.loading) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(padding),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     CircularProgressIndicator()
                 }
@@ -87,7 +88,7 @@ fun InfoAnimeScreen(
                     AsyncImage(
                         model = anime.images.jpg.imageUrl,
                         contentDescription = anime.name,
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.Fit,
                         modifier = Modifier
                             .fillMaxWidth()
                             .aspectRatio(16 / 9f)
