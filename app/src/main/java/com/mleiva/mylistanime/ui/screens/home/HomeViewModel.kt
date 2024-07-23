@@ -8,6 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.mleiva.mylistanime.data.model.Anime
 import com.mleiva.mylistanime.data.repository.AnimesClient
 import com.mleiva.mylistanime.data.repository.AnimesRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /***
@@ -17,15 +21,15 @@ import kotlinx.coroutines.launch
  ***/
 class HomeViewModel: ViewModel() {
 
-    var uiState by mutableStateOf(UiState())
-        private set
+    private val _state = MutableStateFlow(UiState())
+    val state: StateFlow<UiState> = _state.asStateFlow()
 
     private val repository: AnimesRepository = AnimesRepository(AnimesClient.instance)
 
-    fun onUiReady() {
+    init {
         viewModelScope.launch {
-            uiState = UiState(loading = true)
-            uiState = UiState(loading = false, animes = repository.fetchAnimes())
+            _state.value = UiState(loading = true)
+            _state.value = UiState(loading = false, animes = repository.fetchAnimes())
         }
     }
 

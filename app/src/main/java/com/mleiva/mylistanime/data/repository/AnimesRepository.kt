@@ -1,5 +1,6 @@
 package com.mleiva.mylistanime.data.repository
 
+import androidx.compose.runtime.staticCompositionLocalOf
 import com.mleiva.mylistanime.data.model.Anime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,6 +30,10 @@ private fun Data.toDomainModel() = Anime(
     images = images,
     name = title,
     episodes = episodes,
+    status = status,
+    rating = rating,
+    synopsis = synopsis,
     broadcast = broadcast,
-    genres = genres
+    genres = genres,
+    studios = studios,
 )

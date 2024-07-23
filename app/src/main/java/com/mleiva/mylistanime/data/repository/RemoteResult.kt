@@ -20,8 +20,12 @@ data class RemoteResultData(
             images = results.images,
             name = results.title,
             episodes = results.episodes,
+            status = results.status,
+            rating = results.rating,
+            synopsis = results.synopsis,
             broadcast = results.broadcast,
-            genres = results.genres
+            genres = results.genres,
+            studios = results.studios
         )
     }
 }
@@ -36,10 +40,18 @@ data class Data(
     val title: String = "",
     @SerialName("episodes")
     val episodes: Int = 0,
+    @SerialName("status")
+    val status: String = "",
+    @SerialName("rating")
+    val rating: String = "",
+    @SerialName("synopsis")
+    val synopsis: String = "",
     @SerialName("broadcast")
     val broadcast: Broadcast = Broadcast(),
     @SerialName("genres")
     val genres: List<Genre> = emptyList(),
+    @SerialName("studios")
+    val studios: List<Studio> = emptyList(),
     )
 
 @Serializable
@@ -62,6 +74,18 @@ data class Genre(
     val name: String,
     @SerialName("type")
     val type: String,
+    @SerialName("url")
+    val url: String
+)
+
+@Serializable
+data class Studio(
+    @SerialName("mal_id")
+    val malId: Int,
+    @SerialName("type")
+    val type: String,
+    @SerialName("name")
+    val name: String,
     @SerialName("url")
     val url: String
 )

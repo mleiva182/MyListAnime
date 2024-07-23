@@ -3,6 +3,7 @@ package com.mleiva.mylistanime.data.model
 import com.mleiva.mylistanime.data.repository.Broadcast
 import com.mleiva.mylistanime.data.repository.Genre
 import com.mleiva.mylistanime.data.repository.Images
+import com.mleiva.mylistanime.data.repository.Studio
 
 /***
  * Project: MyListAnime
@@ -14,6 +15,10 @@ data class Anime(
     val images: Images,
     val name: String,
     val episodes: Int,
+    val status: String,
+    val rating: String,
+    val synopsis: String,
     val broadcast: Broadcast,
-    val genres: List<Genre>
+    val genres: List<Genre>,
+    val studios: List<Studio>
 )

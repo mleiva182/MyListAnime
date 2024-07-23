@@ -20,22 +20,35 @@ import com.mleiva.mylistanime.ui.screens.home.HomeScreen
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "home") {
-        composable("home") {
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
+        composable(Screen.Home.route) {
             HomeScreen(onAnimeClick = { anime ->
-                navController.navigate("detail/${anime.id}")
+                navController.navigate(Screen.Detail.createRoute(anime.id))
             })
         }
 
         composable(
-            route = "detail/{animeId}",
-            arguments = listOf(navArgument("animeId") { type = NavType.IntType })
+            route = Screen.Detail.route,
+            arguments = listOf(navArgument(NavArgs.AnimeId.key) { type = NavType.IntType })
         ) { backStackEntry ->
-            val animeId = requireNotNull(backStackEntry.arguments?.getInt("animeId"))
+            val animeId = requireNotNull(backStackEntry.arguments?.getInt(NavArgs.AnimeId.key))
             InfoAnimeScreen(
                 viewModel { InfoAnimeViewModel(animeId) },
                 onBack = { navController.popBackStack() })
         }
 
     }
+}
+
+sealed class Screen(val route: String){
+
+    data object Home: Screen("home")
+    data object Detail: Screen("detail/{${NavArgs.AnimeId.key}}"){
+        fun createRoute(animeId: Int) = "detail/$animeId"
+    }
+
+}
+
+enum class NavArgs(val key: String) {
+    AnimeId("animeId")
 }

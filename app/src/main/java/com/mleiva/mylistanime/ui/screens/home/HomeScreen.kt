@@ -14,7 +14,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -22,16 +26,22 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
+import com.mleiva.mylistanime.R
 import com.mleiva.mylistanime.data.model.Anime
 import com.mleiva.mylistanime.ui.common.LoadingProgressIndicator
 import com.mleiva.mylistanime.ui.screens.Screen
@@ -48,10 +58,7 @@ fun HomeScreen(
     vm: HomeViewModel = viewModel()
 ) {
 
-    LaunchedEffect(true){
-        vm.onUiReady()
-    }
-
+    val state by vm.state.collectAsState()
 
     Screen {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -61,7 +68,7 @@ fun HomeScreen(
                 TopAppBar(
                     title = { Text(
                         color = Color.Black,
-                        text = "MyAnimeList"
+                        text = stringResource(id = R.string.app_name)
                     ) },
                     scrollBehavior = scrollBehavior,
                 )
@@ -69,7 +76,6 @@ fun HomeScreen(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             contentWindowInsets = WindowInsets.safeDrawing,
         ){ padding ->
-            val state = vm.uiState
 
             if (state.loading) {
                 LoadingProgressIndicator(modifier = Modifier.padding(padding))
@@ -112,7 +118,9 @@ fun AnimeItem(anime: Anime, onClick: () -> Unit) {
             text = anime.name,
             style = MaterialTheme.typography.bodySmall,
             maxLines = 1,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
         )
     }
 }
