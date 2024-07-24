@@ -1,6 +1,8 @@
-package com.mleiva.mylistanime.data.repository
+package com.mleiva.mylistanime.data.datasource.remote
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.mleiva.mylistanime.data.model.Anime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -25,7 +27,8 @@ data class RemoteResultData(
             synopsis = results.synopsis,
             broadcast = results.broadcast,
             genres = results.genres,
-            studios = results.studios
+            studios = results.studios,
+            favorite = false
         )
     }
 }

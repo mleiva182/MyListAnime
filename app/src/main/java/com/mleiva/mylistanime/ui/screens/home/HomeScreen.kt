@@ -1,5 +1,6 @@
 package com.mleiva.mylistanime.ui.screens.home
 
+import android.text.style.IconMarginSpan
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -55,7 +57,7 @@ import com.mleiva.mylistanime.ui.screens.Screen
 @Composable
 fun HomeScreen(
     onAnimeClick: (Anime) -> Unit,
-    vm: HomeViewModel = viewModel()
+    vm: HomeViewModel
 ) {
 
     val state by vm.state.collectAsState()
@@ -105,15 +107,24 @@ fun AnimeItem(anime: Anime, onClick: () -> Unit) {
     Column(
         modifier = Modifier.clickable(onClick = onClick)
     ) {
-        AsyncImage(
-            model = anime.images.jpg.imageUrl,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(2 / 3f)
-                .clip(MaterialTheme.shapes.small)
-        )
+        Box {
+            AsyncImage(
+                model = anime.images.jpg.imageUrl,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(2 / 3f)
+                    .clip(MaterialTheme.shapes.small)
+            )
+            if (anime.favorite){
+                Icon(imageVector = Icons.Default.Favorite,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.inverseOnSurface,
+                    modifier = Modifier.padding(8.dp).align(Alignment.TopEnd))
+            }
+        }
+
         Text(
             text = anime.name,
             style = MaterialTheme.typography.bodySmall,

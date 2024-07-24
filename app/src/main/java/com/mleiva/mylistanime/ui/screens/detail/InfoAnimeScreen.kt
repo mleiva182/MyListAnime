@@ -15,6 +15,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
@@ -67,14 +68,6 @@ fun InfoAnimeScreen(
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(state.message) {
-        state.message?.let {
-            snackbarHostState.currentSnackbarData?.dismiss()
-            snackbarHostState.showSnackbar(it)
-            vm.onMessageShown()
-        }
-    }
-
     Screen {
         Scaffold(
             topBar = {
@@ -91,9 +84,11 @@ fun InfoAnimeScreen(
                 )
             },
             floatingActionButton = {
+
+                val favorite = state.anime?.favorite ?: false
                 FloatingActionButton(onClick = { vm.onFavoriteClicked() }) {
                     Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
+                        imageVector = if(favorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = stringResource(id = R.string.favorite)
                     )
                 }
@@ -186,33 +181,9 @@ fun InfoAnimeScreen(
 
                         }
                 }
-
-                    /*Text(
-                        text = anime.name,
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.headlineMedium
-                    )*/
                 }
             }
         }
     }
 
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun InfoAnimePreview() {
-    MyListAnimeTheme(
-        darkTheme = true
-    ) {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = androidx.compose.material.MaterialTheme.colors.background
-        ) {
-            InfoAnimeScreen(
-                viewModel { InfoAnimeViewModel(1) },
-                {})
-        }
-    }
 }

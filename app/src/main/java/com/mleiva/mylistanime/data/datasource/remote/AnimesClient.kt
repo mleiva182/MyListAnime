@@ -1,4 +1,4 @@
-package com.mleiva.mylistanime.data.repository
+package com.mleiva.mylistanime.data.datasource.remote
 
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
