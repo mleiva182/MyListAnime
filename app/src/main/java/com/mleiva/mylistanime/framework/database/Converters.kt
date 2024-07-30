@@ -1,12 +1,12 @@
-package com.mleiva.mylistanime.data
+package com.mleiva.mylistanime.framework.database
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.mleiva.mylistanime.framework.remote.Broadcast
-import com.mleiva.mylistanime.framework.remote.Genre
-import com.mleiva.mylistanime.framework.remote.Images
-import com.mleiva.mylistanime.framework.remote.Studio
+import com.mleiva.mylistanime.domain.Broadcast
+import com.mleiva.mylistanime.domain.Genre
+import com.mleiva.mylistanime.domain.Images
+import com.mleiva.mylistanime.domain.Studio
 
 /***
  * Project: MyListAnime

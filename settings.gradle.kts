@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "MyListAnime"
 include(":app")
- 
+include(":domain")
+include(":data")
+include(":usecases")

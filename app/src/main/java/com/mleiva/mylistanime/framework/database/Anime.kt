@@ -2,10 +2,10 @@ package com.mleiva.mylistanime.framework.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mleiva.mylistanime.framework.remote.Broadcast
-import com.mleiva.mylistanime.framework.remote.Genre
-import com.mleiva.mylistanime.framework.remote.Images
-import com.mleiva.mylistanime.framework.remote.Studio
+import com.mleiva.mylistanime.domain.Broadcast
+import com.mleiva.mylistanime.domain.Genre
+import com.mleiva.mylistanime.domain.Images
+import com.mleiva.mylistanime.domain.Studio
 
 @Entity
 data class DbAnime(

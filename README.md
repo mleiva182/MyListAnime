@@ -14,3 +14,4 @@
 * ViewModel and data from api
 * ViewModel UI with StateFlow, navigation
 * repository, datasources, bd room. reactive ui
+* clean arquitecture with modules 

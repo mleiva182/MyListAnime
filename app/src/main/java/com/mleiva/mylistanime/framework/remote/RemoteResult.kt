@@ -2,6 +2,11 @@ package com.mleiva.mylistanime.framework.remote
 
 
 import com.mleiva.mylistanime.domain.Anime
+import com.mleiva.mylistanime.domain.Broadcast
+import com.mleiva.mylistanime.domain.Genre
+import com.mleiva.mylistanime.domain.Images
+import com.mleiva.mylistanime.domain.Jpg
+import com.mleiva.mylistanime.domain.Studio
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -55,6 +60,7 @@ data class Data(
     val studios: List<Studio> = emptyList(),
     )
 
+/*
 @Serializable
 data class Broadcast(
     @SerialName("day")
@@ -105,4 +111,4 @@ data class Jpg(
     val largeImageUrl: String = "",
     @SerialName("small_image_url")
     val smallImageUrl: String = ""
-)
+)*/
