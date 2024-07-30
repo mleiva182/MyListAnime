@@ -1,10 +1,9 @@
-package com.mleiva.mylistanime.data.datasource.database
+package com.mleiva.mylistanime.framework.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.mleiva.mylistanime.data.model.Anime
 import kotlinx.coroutines.flow.Flow
 
 /***
@@ -15,15 +14,15 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AnimesDao {
 
-    @Query("SELECT * FROM Anime")
-    fun getAllAnimes(): Flow<List<Anime>>
+    @Query("SELECT * FROM DbAnime")
+    fun getAllAnimes(): Flow<List<DbAnime>>
 
-    @Query("SELECT * FROM Anime WHERE id = :id")
-    fun getAnimeById(id: Int): Flow<Anime>
+    @Query("SELECT * FROM DbAnime WHERE id = :id")
+    fun getAnimeById(id: Int): Flow<DbAnime>
 
-    @Query("SELECT COUNT(*) FROM Anime")
+    @Query("SELECT COUNT(*) FROM DbAnime")
     suspend fun countAnimes(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAnime(anime: List<Anime>)
+    suspend fun insertAnime(anime: List<DbAnime>)
 }

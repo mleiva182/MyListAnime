@@ -1,4 +1,4 @@
-package com.mleiva.mylistanime.data.datasource.remote
+package com.mleiva.mylistanime.framework.remote
 
 import retrofit2.http.GET
 import retrofit2.http.Path

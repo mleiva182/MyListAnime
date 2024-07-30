@@ -1,9 +1,7 @@
-package com.mleiva.mylistanime.data.datasource.remote
+package com.mleiva.mylistanime.framework.remote
 
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.mleiva.mylistanime.data.model.Anime
+import com.mleiva.mylistanime.domain.Anime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +14,7 @@ data class RemoteResult(
 data class RemoteResultData(
     @SerialName("data") val results: Data
 ) {
-    fun toDomainModel(): Anime{
+    fun toDomainModel(): Anime {
         return Anime(
             id = results.malId,
             images = results.images,

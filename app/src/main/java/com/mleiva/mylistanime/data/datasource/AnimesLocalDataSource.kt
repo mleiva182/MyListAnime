@@ -1,7 +1,6 @@
 package com.mleiva.mylistanime.data.datasource
 
-import com.mleiva.mylistanime.data.datasource.database.AnimesDao
-import com.mleiva.mylistanime.data.model.Anime
+import com.mleiva.mylistanime.domain.Anime
 import kotlinx.coroutines.flow.Flow
 
 /***
@@ -9,14 +8,11 @@ import kotlinx.coroutines.flow.Flow
  * From: com.mleiva.mylistanime.data.datasource
  * Creted by: Marcelo Leiva on 23-07-2024 at 16:23
  ***/
-class AnimesLocalDataSource(private val animesDao: AnimesDao) {
+interface AnimesLocalDataSource {
+    val animes: Flow<List<Anime>>
+    fun findAnimeById(id: Int): Flow<Anime?>
 
-    val animes: Flow<List<Anime>> = animesDao.getAllAnimes()
+    suspend fun isEmpty(): Boolean
 
-    fun findAnimeById(id: Int): Flow<Anime?> = animesDao.getAnimeById(id)
-
-    suspend fun isEmpty(): Boolean = animesDao.countAnimes() == 0
-
-    suspend fun save(animes: List<Anime>) = animesDao.insertAnime(animes)
-
+    suspend fun save(animes: List<Anime>)
 }

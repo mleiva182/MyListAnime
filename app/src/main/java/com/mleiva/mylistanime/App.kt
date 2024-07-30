@@ -2,7 +2,7 @@ package com.mleiva.mylistanime
 
 import android.app.Application
 import androidx.room.Room
-import com.mleiva.mylistanime.data.datasource.database.AnimesDataBase
+import com.mleiva.mylistanime.framework.database.AnimesDataBase
 
 /***
  * Project: MyListAnime

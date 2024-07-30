@@ -1,6 +1,5 @@
 package com.mleiva.mylistanime.ui.screens.navigation
 
-import android.app.Application
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -10,13 +9,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.mleiva.mylistanime.App
-import com.mleiva.mylistanime.data.datasource.AnimesLocalDataSource
-import com.mleiva.mylistanime.data.datasource.AnimesRemoteDataSource
+import com.mleiva.mylistanime.framework.remote.AnimesClient
 import com.mleiva.mylistanime.data.repository.AnimesRepository
+import com.mleiva.mylistanime.framework.AnimesRoomDataSource
+import com.mleiva.mylistanime.framework.AnimesServerDataSource
 import com.mleiva.mylistanime.ui.screens.detail.InfoAnimeScreen
 import com.mleiva.mylistanime.ui.screens.detail.InfoAnimeViewModel
 import com.mleiva.mylistanime.ui.screens.home.HomeScreen
 import com.mleiva.mylistanime.ui.screens.home.HomeViewModel
+import com.mleiva.mylistanime.usecases.ChangeFavoriteUseCase
+import com.mleiva.mylistanime.usecases.FetchAnimesUseCase
+import com.mleiva.mylistanime.usecases.FindAnimeByIdUseCase
 
 /***
  * Project: MyListAnime
@@ -27,15 +30,17 @@ import com.mleiva.mylistanime.ui.screens.home.HomeViewModel
 fun Navigation() {
     val navController = rememberNavController()
     val app = LocalContext.current.applicationContext as App
-    val animesLocalDataSource = AnimesLocalDataSource(app.dataBase.animesDao())
-    val animesRepository = AnimesRepository( animesLocalDataSource, AnimesRemoteDataSource())
+    val animesLocalDataSource = AnimesRoomDataSource(app.dataBase.animesDao())
+    val animesRepository = AnimesRepository( animesLocalDataSource, AnimesServerDataSource(
+        AnimesClient.instance)
+    )
 
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             HomeScreen(onAnimeClick = { anime ->
                 navController.navigate(Screen.Detail.createRoute(anime.id))
             },
-            viewModel { HomeViewModel(animesRepository) })
+                viewModel { HomeViewModel(FetchAnimesUseCase(animesRepository)) })
         }
 
         composable(
@@ -44,7 +49,11 @@ fun Navigation() {
         ) { backStackEntry ->
             val animeId = requireNotNull(backStackEntry.arguments?.getInt(NavArgs.AnimeId.key))
             InfoAnimeScreen(
-                viewModel { InfoAnimeViewModel(animesRepository,animeId) },
+                viewModel { InfoAnimeViewModel(
+                    animeId,
+                    FindAnimeByIdUseCase(animesRepository),
+                    ChangeFavoriteUseCase(animesRepository)
+                ) },
                 onBack = { navController.popBackStack() })
         }
 

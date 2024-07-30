@@ -1,13 +1,11 @@
 package com.mleiva.mylistanime.data.repository
 
-import androidx.compose.runtime.staticCompositionLocalOf
 import com.mleiva.mylistanime.data.datasource.AnimesLocalDataSource
 import com.mleiva.mylistanime.data.datasource.AnimesRemoteDataSource
-import com.mleiva.mylistanime.data.model.Anime
-import kotlinx.coroutines.Dispatchers
+import com.mleiva.mylistanime.domain.Anime
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.transform
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.onEach
 
 /***
  * Project: MyListAnime
@@ -19,36 +17,21 @@ class AnimesRepository(
     private val animesRemoteDataSource: AnimesRemoteDataSource
 ) {
 
-    val animes: Flow<List<Anime>> = animesLocalDataSource.animes.transform { localAnimes ->
-        val movies = localAnimes.takeIf { it.isNotEmpty() }
-            ?: animesRemoteDataSource.fetchAnimes().also {
-                animesLocalDataSource.save(it)
-            }
-        emit(movies)
+    val animes: Flow<List<Anime>> = animesLocalDataSource.animes.onEach { localAnimes ->
+        if (localAnimes.isEmpty()) {
+            val remoteAnimes = animesRemoteDataSource.fetchAnimes()
+            animesLocalDataSource.save(remoteAnimes)
+        }
     }
 
-    /*suspend fun fetchAnimes(): List<Anime> {
-        if (animesLocalDataSource.isEmpty()) {
-            val animes = animesRemoteDataSource.fetchAnimes()
-            animesLocalDataSource.save(animes)
+    fun findInfoAnimeById(id: Int): Flow<Anime> = animesLocalDataSource.findAnimeById(id)
+        .onEach { anime ->
+            if (anime == null) {
+                val remoteAnime = animesRemoteDataSource.findInfoAnimeById(id)
+                animesLocalDataSource.save(listOf(remoteAnime))
+            }
         }
-        return animesLocalDataSource.fetchAnimes()
-    }*/
-
-    fun findInfoAnimeById(id: Int): Flow<Anime> =
-        animesLocalDataSource.findAnimeById(id).transform { localAnime ->
-            val movie = localAnime
-                ?: animesRemoteDataSource.findInfoAnimeById(id).also { animesLocalDataSource.save(listOf(it)) }
-            emit(movie)
-        }
-
-    /*suspend fun findInfoAnimeById(id: Int): Anime {
-        if(animesLocalDataSource.findAnimeById(id) == null) {
-            val movie = animesRemoteDataSource.findInfoAnimeById(id)
-            animesLocalDataSource.save(listOf(movie))
-        }
-        return checkNotNull(animesLocalDataSource.findAnimeById(id))
-    }*/
+        .filterNotNull()
 
     suspend fun changeFavorite(anime: Anime){
         animesLocalDataSource.save(listOf(anime.copy(favorite = !anime.favorite)))
