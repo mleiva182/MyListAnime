@@ -17,5 +17,13 @@ gradlePlugin {
             id = "architectcoders.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
+        register("androidRoom") {
+            id = "architectcoders.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
+        register("jvmRetrofit") {
+            id = "architectcoders.jvm.retrofit"
+            implementationClass = "JvmRetrofitConventionPlugin"
+        }
     }
 }

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.ksp)
     id("mleiva.android.application")
     id("architectcoders.android.application.compose")
+    id("architectcoders.android.room")
+    id("architectcoders.jvm.retrofit")
 }
 
 android {
@@ -45,19 +47,7 @@ dependencies {
     implementation(project(":usecases"))
 
     implementation(libs.activity.compose)
-    implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.coil.compose)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.kotlinx.serialization)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.kotlinx.coroutines.android)
-
-    ksp(libs.androidx.room.compiler)
-
-    implementation(libs.gson)
-
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
