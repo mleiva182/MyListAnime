@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.mleiva.mylistanime.R
 import com.mleiva.mylistanime.domain.Anime
@@ -49,7 +50,7 @@ import com.mleiva.mylistanime.ui.screens.Screen
 @Composable
 fun HomeScreen(
     onAnimeClick: (Anime) -> Unit,
-    vm: HomeViewModel
+    vm: HomeViewModel = hiltViewModel()
 ) {
 
     val state by vm.state.collectAsState()
@@ -113,7 +114,9 @@ fun AnimeItem(anime: Anime, onClick: () -> Unit) {
                 Icon(imageVector = Icons.Default.Favorite,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.inverseOnSurface,
-                    modifier = Modifier.padding(8.dp).align(Alignment.TopEnd))
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.TopEnd))
             }
         }
 

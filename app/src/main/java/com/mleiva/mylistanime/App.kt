@@ -3,12 +3,15 @@ package com.mleiva.mylistanime
 import android.app.Application
 import androidx.room.Room
 import com.mleiva.mylistanime.framework.database.AnimesDataBase
+import dagger.hilt.android.HiltAndroidApp
 
 /***
  * Project: MyListAnime
  * From: com.mleiva.mylistanime
  * Creted by: Marcelo Leiva on 23-07-2024 at 16:19
  ***/
+
+@HiltAndroidApp
 class App : Application() {
 
     lateinit var dataBase: AnimesDataBase

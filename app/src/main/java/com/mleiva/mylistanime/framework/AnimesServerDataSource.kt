@@ -6,8 +6,9 @@ import com.mleiva.mylistanime.framework.remote.AnimesService
 import com.mleiva.mylistanime.framework.remote.Data
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class AnimesServerDataSource(
+class AnimesServerDataSource @Inject constructor(
     private val animesService: AnimesService
 ) : AnimesRemoteDataSource {
 

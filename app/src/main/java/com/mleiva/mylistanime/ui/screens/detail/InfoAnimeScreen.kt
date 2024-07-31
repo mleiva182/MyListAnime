@@ -44,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
@@ -60,7 +61,7 @@ import com.mleiva.mylistanime.ui.theme.MyListAnimeTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoAnimeScreen(
-    vm: InfoAnimeViewModel,
+    vm: InfoAnimeViewModel = hiltViewModel(),
     onBack: () -> Unit
 ) {
 

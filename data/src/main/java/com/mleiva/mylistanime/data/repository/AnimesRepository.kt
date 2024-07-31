@@ -6,13 +6,14 @@ import com.mleiva.mylistanime.domain.Anime
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 /***
  * Project: MyListAnime
  * From: com.mleiva.mylistanime.data.repository
  * Creted by: Marcelo Leiva on 17-04-2024 at 18:50
  ***/
-class AnimesRepository(
+class AnimesRepository @Inject constructor(
     private val animesLocalDataSource: AnimesLocalDataSource,
     private val animesRemoteDataSource: AnimesRemoteDataSource
 ) {

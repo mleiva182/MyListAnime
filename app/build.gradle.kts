@@ -3,9 +3,11 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     id("mleiva.android.application")
-    id("architectcoders.android.application.compose")
-    id("architectcoders.android.room")
-    id("architectcoders.jvm.retrofit")
+    id("mleiva.android.application.compose")
+    id("mleiva.android.room")
+    id("mleiva.jvm.retrofit")
+    id("mleiva.di.library.compose")
+    id("mleiva.di.library")
 }
 
 android {

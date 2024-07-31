@@ -6,8 +6,10 @@ import com.mleiva.mylistanime.framework.database.AnimesDao
 import com.mleiva.mylistanime.framework.database.DbAnime
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class AnimesRoomDataSource(private val animesDao: AnimesDao) : AnimesLocalDataSource {
+class AnimesRoomDataSource @Inject constructor(
+    private val animesDao: AnimesDao) : AnimesLocalDataSource {
 
     override val animes: Flow<List<Anime>> = animesDao.getAllAnimes().map { animes -> animes.map { it.toDomainModel() } }
 

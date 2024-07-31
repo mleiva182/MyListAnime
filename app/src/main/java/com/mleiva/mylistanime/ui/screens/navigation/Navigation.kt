@@ -29,31 +29,19 @@ import com.mleiva.mylistanime.usecases.FindAnimeByIdUseCase
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val app = LocalContext.current.applicationContext as App
-    val animesLocalDataSource = AnimesRoomDataSource(app.dataBase.animesDao())
-    val animesRepository = AnimesRepository( animesLocalDataSource, AnimesServerDataSource(
-        AnimesClient.instance)
-    )
 
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             HomeScreen(onAnimeClick = { anime ->
                 navController.navigate(Screen.Detail.createRoute(anime.id))
-            },
-                viewModel { HomeViewModel(FetchAnimesUseCase(animesRepository)) })
+            })
         }
 
         composable(
             route = Screen.Detail.route,
             arguments = listOf(navArgument(NavArgs.AnimeId.key) { type = NavType.IntType })
         ) { backStackEntry ->
-            val animeId = requireNotNull(backStackEntry.arguments?.getInt(NavArgs.AnimeId.key))
             InfoAnimeScreen(
-                viewModel { InfoAnimeViewModel(
-                    animeId,
-                    FindAnimeByIdUseCase(animesRepository),
-                    ChangeFavoriteUseCase(animesRepository)
-                ) },
                 onBack = { navController.popBackStack() })
         }
 

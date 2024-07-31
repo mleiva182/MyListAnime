@@ -14,16 +14,24 @@ gradlePlugin {
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidApplicationCompose") {
-            id = "architectcoders.android.application.compose"
+            id = "mleiva.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
         register("androidRoom") {
-            id = "architectcoders.android.room"
+            id = "mleiva.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
         register("jvmRetrofit") {
-            id = "architectcoders.jvm.retrofit"
+            id = "mleiva.jvm.retrofit"
             implementationClass = "JvmRetrofitConventionPlugin"
+        }
+        register("diLibrary") {
+            id = "mleiva.di.library"
+            implementationClass = "DiLibraryConventionPlugin"
+        }
+        register("diLibraryCompose") {
+            id = "mleiva.di.library.compose"
+            implementationClass = "DiLibraryComposeConventionPlugin"
         }
     }
 }

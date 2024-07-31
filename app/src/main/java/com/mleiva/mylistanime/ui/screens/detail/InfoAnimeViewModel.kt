@@ -5,20 +5,24 @@ import androidx.lifecycle.viewModelScope
 import com.mleiva.mylistanime.domain.Anime
 import com.mleiva.mylistanime.usecases.ChangeFavoriteUseCase
 import com.mleiva.mylistanime.usecases.FindAnimeByIdUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Named
 
 /***
  * Project: MyListAnime
  * From: com.mleiva.mylistanime.ui.screens.detail
  * Creted by: Marcelo Leiva on 18-04-2024 at 17:12
  ***/
-class InfoAnimeViewModel(
-    private val id: Int,
-    private val findAnimeByIdUseCase: FindAnimeByIdUseCase,
+@HiltViewModel
+class InfoAnimeViewModel @Inject constructor(
+    @Named("animeId") id: Int,
+    findAnimeByIdUseCase: FindAnimeByIdUseCase,
     private val changeFavoriteUseCase: ChangeFavoriteUseCase
 ):
     ViewModel() {
