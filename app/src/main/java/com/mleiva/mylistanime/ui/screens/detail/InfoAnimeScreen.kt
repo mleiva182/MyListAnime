@@ -11,14 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -76,7 +76,7 @@ fun InfoAnimeScreen(
                     navigationIcon = {
                         IconButton(onClick = onBack) {
                             Icon(
-                                imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                                imageVector = Icons.Default.ArrowBack,
                                 contentDescription = stringResource(id = R.string.back)
                             )
                         }
@@ -119,9 +119,9 @@ fun InfoAnimeScreen(
                     Card(
                         modifier = Modifier
                             .padding(15.dp),
-                        elevation = 4.dp,
+                        elevation = CardDefaults.cardElevation(4.dp),
                         shape = RoundedCornerShape(20.dp),
-                        contentColor = Color.White
+                        colors = CardDefaults.cardColors(Color.White)
                     ){
                         Column(
                             modifier = Modifier.padding(top = 7.dp, start = 20.dp)
