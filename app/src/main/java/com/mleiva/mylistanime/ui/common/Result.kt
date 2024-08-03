@@ -1,4 +1,4 @@
-package com.mleiva.mylistanime
+package com.mleiva.mylistanime.ui.common
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow

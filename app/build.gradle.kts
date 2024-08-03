@@ -51,11 +51,14 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.androidx.navigation.compose)
 
-    testImplementation(libs.junit)
+    //testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    testImplementation(project(":test:unit"))
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
     debugImplementation(libs.androidx.ui.test.manifest)
 
     task("testClasses")

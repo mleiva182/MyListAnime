@@ -38,8 +38,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.mleiva.mylistanime.R
 import com.mleiva.mylistanime.domain.Anime
+import com.mleiva.mylistanime.ui.common.AcScaffold
 import com.mleiva.mylistanime.ui.common.LoadingProgressIndicator
-import com.mleiva.mylistanime.ui.screens.Screen
+import com.mleiva.mylistanime.ui.common.Screen
 
 /***
  * Project: MyListAnime
@@ -52,29 +53,27 @@ fun HomeScreen(
     onAnimeClick: (Anime) -> Unit,
     vm: HomeViewModel = hiltViewModel()
 ) {
+    val homeState = rememberHomeState()
 
-    val state by vm.state.collectAsState()
+    vm.onUiReady()
 
     Screen {
-        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+        val state by vm.state.collectAsState()
 
-        Scaffold(
+        AcScaffold(
+            state = state,
             topBar = {
                 TopAppBar(
                     title = { Text(
                         color = Color.Black,
                         text = stringResource(id = R.string.app_name)
                     ) },
-                    scrollBehavior = scrollBehavior,
+                    scrollBehavior = homeState.scrollBehavior,
                 )
             },
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            modifier = Modifier.nestedScroll(homeState.scrollBehavior.nestedScrollConnection),
             contentWindowInsets = WindowInsets.safeDrawing,
-        ){ padding ->
-
-            if (state.loading) {
-                LoadingProgressIndicator(modifier = Modifier.padding(padding))
-            }
+        ){ padding, animes ->
 
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(120.dp),
@@ -83,7 +82,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 modifier = Modifier.padding(horizontal = 4.dp)
             ) {
-                items(state.animes, key = { it.id }) {
+                items(animes, key = { it.id }) {
                     AnimeItem(anime = it) { onAnimeClick(it) }
                 }
             }

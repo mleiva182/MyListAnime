@@ -33,5 +33,9 @@ gradlePlugin {
             id = "mleiva.di.library.compose"
             implementationClass = "DiLibraryComposeConventionPlugin"
         }
+        register("jvmLibrary") {
+            id = "mleiva.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }

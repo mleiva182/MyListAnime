@@ -18,7 +18,8 @@ class AnimesRepository @Inject constructor(
     private val animesRemoteDataSource: AnimesRemoteDataSource
 ) {
 
-    val animes: Flow<List<Anime>> = animesLocalDataSource.animes.onEach { localAnimes ->
+    val animes: Flow<List<Anime>>
+        get() = animesLocalDataSource.animes.onEach { localAnimes ->
         if (localAnimes.isEmpty()) {
             val remoteAnimes = animesRemoteDataSource.fetchAnimes()
             animesLocalDataSource.save(remoteAnimes)

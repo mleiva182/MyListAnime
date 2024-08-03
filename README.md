@@ -16,3 +16,4 @@
 * repository, datasources, bd room. reactive ui
 * clean arquitecture with modules and convention plugins
 * dependency injection hilt
+* Unit test useCases, repository, homeViewModel, InfoAnimeViewModel

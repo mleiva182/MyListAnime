@@ -1,6 +1,6 @@
 plugins {
     id("java-library")
-    alias(libs.plugins.jetbrains.kotlin.jvm)
+    id("mleiva.jvm.library")
     id("mleiva.jvm.retrofit")
     id("mleiva.di.library")
 }

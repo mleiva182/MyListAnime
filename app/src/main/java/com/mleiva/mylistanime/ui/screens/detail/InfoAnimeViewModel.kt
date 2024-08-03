@@ -3,13 +3,13 @@ package com.mleiva.mylistanime.ui.screens.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mleiva.mylistanime.domain.Anime
+import com.mleiva.mylistanime.ui.common.Result
+import com.mleiva.mylistanime.ui.common.ifSuccess
+import com.mleiva.mylistanime.ui.common.stateAsResultIn
 import com.mleiva.mylistanime.usecases.ChangeFavoriteUseCase
 import com.mleiva.mylistanime.usecases.FindAnimeByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -27,10 +27,7 @@ class InfoAnimeViewModel @Inject constructor(
 ):
     ViewModel() {
 
-    /*private val _state = MutableStateFlow(UiState())
-    val state: StateFlow<UiState> = _state.asStateFlow()*/
-
-    data class UiState(
+    /*data class UiState(
         val loading: Boolean = false,
         val anime: Anime? = null
     )
@@ -43,17 +40,18 @@ class InfoAnimeViewModel @Inject constructor(
             initialValue = UiState(loading = true)
         )
 
-    /*init {
-        viewModelScope.launch {
-            _state.value = UiState(loading = true)
-            repository.findInfoAnimeById(id).collect{ anime ->
-                _state.value = UiState(loading = false, anime = anime)
+    fun onFavoriteClicked() {
+        state.value.anime?.let {
+            viewModelScope.launch {
+                changeFavoriteUseCase(it)
             }
         }
     }*/
+    val state: StateFlow<Result<Anime>> = findAnimeByIdUseCase(id)
+        .stateAsResultIn(scope = viewModelScope)
 
     fun onFavoriteClicked() {
-        state.value.anime?.let {
+        state.value.ifSuccess {
             viewModelScope.launch {
                 changeFavoriteUseCase(it)
             }

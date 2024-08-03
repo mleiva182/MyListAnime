@@ -1,4 +1,4 @@
-package com.mleiva.mylistanime.ui.screens
+package com.mleiva.mylistanime.ui.common
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface

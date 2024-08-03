@@ -1,6 +1,6 @@
 plugins {
     id("java-library")
-    alias(libs.plugins.jetbrains.kotlin.jvm)
+    id("mleiva.jvm.library")
     id("mleiva.di.library")
 }
 
@@ -12,4 +12,5 @@ java {
 dependencies{
     implementation(project(":domain"))
     implementation(libs.kotlinx.coroutines.core)
+    testImplementation(project(":test:unit"))
 }
