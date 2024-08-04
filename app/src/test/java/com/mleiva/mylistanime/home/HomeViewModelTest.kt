@@ -1,4 +1,4 @@
-package com.mleiva.mylistanime
+package com.mleiva.mylistanime.home
 
 import app.cash.turbine.test
 import com.mleiva.myanimelist.sampleAnimes
@@ -7,7 +7,6 @@ import com.mleiva.mylistanime.ui.screens.home.HomeViewModel
 import com.mleiva.mylistanime.usecases.FetchAnimesUseCase
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest

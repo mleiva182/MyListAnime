@@ -1,4 +1,4 @@
-package com.mleiva.mylistanime
+package com.mleiva.mylistanime.infoanime
 
 import app.cash.turbine.test
 import com.mleiva.myanimelist.sampleAnime
@@ -8,7 +8,6 @@ import com.mleiva.mylistanime.ui.screens.detail.InfoAnimeViewModel
 import com.mleiva.mylistanime.usecases.ChangeFavoriteUseCase
 import com.mleiva.mylistanime.usecases.FindAnimeByIdUseCase
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
