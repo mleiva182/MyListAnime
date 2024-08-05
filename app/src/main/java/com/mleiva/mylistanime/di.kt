@@ -23,12 +23,12 @@ import javax.inject.Singleton
  ***/
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+internal object AppModule {
 
-    @Provides
+    /*@Provides
     @Singleton
     fun providesDatabase(app: Application) = Room.databaseBuilder(app, AnimesDataBase::class.java, "animes-db").build()
-
+*/
     @Provides
     fun providesAnimesDao(db: AnimesDataBase) = db.animesDao()
 
@@ -36,6 +36,21 @@ object AppModule {
     @Singleton
     fun providesAnimesClient() = AnimesClient.instance
 }
+
+@Module
+@InstallIn(SingletonComponent::class)
+object AppExtrasModule {
+
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application) = Room.databaseBuilder(
+        app,
+        AnimesDataBase::class.java,
+        "animes-db"
+    ).build()
+
+}
+
 
 @Module
 @InstallIn(SingletonComponent::class)

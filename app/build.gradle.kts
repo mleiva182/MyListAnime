@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.mleiva.mylistanime.di.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -63,6 +63,8 @@ dependencies {
     testImplementation(project(":test:unit"))
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
     debugImplementation(libs.androidx.ui.test.manifest)
 
     task("testClasses")
