@@ -12,7 +12,7 @@ import retrofit2.create
  * From: com.mleiva.mylistanime.data.repository
  * Creted by: Marcelo Leiva on 17-04-2024 at 18:50
  ***/
-object AnimesClient {
+class AnimesClient(private val apiUrl: String) {
 
     private val okHttpClient = OkHttpClient.Builder()
         .build()
@@ -23,7 +23,7 @@ object AnimesClient {
     }
 
     val instance = Retrofit.Builder()
-        .baseUrl("https://api.jikan.moe/v4/")
+        .baseUrl(apiUrl)
         //.client(okHttpClient)
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()

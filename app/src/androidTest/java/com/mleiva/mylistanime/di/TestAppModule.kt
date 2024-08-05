@@ -12,6 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
+import javax.inject.Named
 import javax.inject.Singleton
 
 /***
@@ -40,4 +41,8 @@ object TestAppModule {
         return db
     }
 
+    @Provides
+    @Singleton
+    @Named("apiUrl")
+    fun provideApiUrl(): String = "http://localhost:8080"
 }

@@ -9,11 +9,13 @@ import com.mleiva.mylistanime.framework.AnimesRoomDataSource
 import com.mleiva.mylistanime.framework.AnimesServerDataSource
 import com.mleiva.mylistanime.framework.database.AnimesDataBase
 import com.mleiva.mylistanime.framework.remote.AnimesClient
+import com.mleiva.mylistanime.framework.remote.AnimesService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 /***
@@ -34,7 +36,9 @@ internal object AppModule {
 
     @Provides
     @Singleton
-    fun providesAnimesClient() = AnimesClient.instance
+    fun providesAnimeClient(
+        @Named("apiUrl") apiUrl: String
+    ): AnimesService = AnimesClient(apiUrl).instance
 }
 
 @Module
@@ -49,6 +53,10 @@ object AppExtrasModule {
         "animes-db"
     ).build()
 
+    @Provides
+    @Singleton
+    @Named("apiUrl")
+    fun provideApiUrl(): String = "https://api.jikan.moe/v4/"
 }
 
 

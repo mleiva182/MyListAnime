@@ -66,6 +66,7 @@ dependencies {
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler)
     debugImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(libs.okhttp.mockwebserver)
 
     task("testClasses")
 }

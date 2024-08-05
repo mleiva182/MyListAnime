@@ -18,4 +18,4 @@
 * dependency injection hilt.
 * Unit test useCases, repository, homeViewModel, InfoAnimeViewModel.
 * Integration test for homeViewModel and InfoAnimeViewModel. fakes with buildAnimesRepositoryWith.
-* UI Screen Test in compose.
+* UI Screen Test in compose with compose Rule(hilt,room,mockwebserver).
