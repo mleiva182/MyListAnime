@@ -1,5 +1,6 @@
 package com.mleiva.mylistanime.ui.screens.home
 
+import android.Manifest
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.mleiva.mylistanime.R
+import com.mleiva.mylistanime.ui.common.Result
 import com.mleiva.mylistanime.domain.Anime
 import com.mleiva.mylistanime.ui.common.AcScaffold
 import com.mleiva.mylistanime.ui.common.LoadingProgressIndicator
@@ -47,19 +49,29 @@ import com.mleiva.mylistanime.ui.common.Screen
  * From: com.mleiva.mylistanime.ui.screens.home
  * Creted by: Marcelo Leiva on 17-04-2024 at 18:32
  ***/
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     onAnimeClick: (Anime) -> Unit,
     vm: HomeViewModel = hiltViewModel()
 ) {
-    val homeState = rememberHomeState()
-
     vm.onUiReady()
 
-    Screen {
-        val state by vm.state.collectAsState()
+    val state by vm.state.collectAsState()
+    HomeScreen(
+        state = state,
+        onAnimeClick = onAnimeClick
+    )
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeScreen(
+    state: Result<List<Anime>>,
+    onAnimeClick: (Anime) -> Unit
+) {
+    val homeState = rememberHomeState()
+
+    Screen {
         AcScaffold(
             state = state,
             topBar = {

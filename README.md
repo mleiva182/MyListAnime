@@ -11,9 +11,11 @@
 ## __DEVELOPMENT__
 
 * screens with compose
-* ViewModel and data from api
-* ViewModel UI with StateFlow, navigation
-* repository, datasources, bd room. reactive ui
-* clean arquitecture with modules and convention plugins
-* dependency injection hilt
-* Unit test useCases, repository, homeViewModel, InfoAnimeViewModel
+* ViewModel and data from api.
+* ViewModel UI with StateFlow, navigation.
+* repository, datasources, bd room. reactive ui.
+* clean arquitecture with modules and convention plugins.
+* dependency injection hilt.
+* Unit test useCases, repository, homeViewModel, InfoAnimeViewModel.
+* Integration test for homeViewModel and InfoAnimeViewModel. fakes with buildAnimesRepositoryWith.
+* UI Screen Test in compose.

@@ -2,8 +2,10 @@ package com.mleiva.myanimelist
 
 import com.mleiva.mylistanime.domain.Anime
 import com.mleiva.mylistanime.domain.Broadcast
+import com.mleiva.mylistanime.domain.Genre
 import com.mleiva.mylistanime.domain.Images
 import com.mleiva.mylistanime.domain.Jpg
+import com.mleiva.mylistanime.domain.Studio
 
 /***
  * Project: MyListAnime
@@ -17,10 +19,10 @@ fun sampleAnime(id: Int = 0) = Anime(
     episodes = id,
     status = "",
     rating = "",
-    synopsis = "",
+    synopsis = "Synopsis $id",
     broadcast = Broadcast(),
-    genres = emptyList(),
-    studios = emptyList(),
+    genres = listOf(Genre(id,"","","")),
+    studios = listOf(Studio(id,"","","")),
     favorite = false
 )
 

@@ -37,6 +37,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.mleiva.mylistanime.R
+import com.mleiva.mylistanime.ui.common.Result
+import com.mleiva.mylistanime.domain.Anime
 import com.mleiva.mylistanime.ui.common.AcScaffold
 import com.mleiva.mylistanime.ui.common.Screen
 
@@ -45,15 +47,30 @@ import com.mleiva.mylistanime.ui.common.Screen
  * From: com.mleiva.mylistanime.ui.screens.detail
  * Creted by: Marcelo Leiva on 18-04-2024 at 17:12
  ***/
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoAnimeScreen(
     vm: InfoAnimeViewModel = hiltViewModel(),
     onBack: () -> Unit
+){
+    val state by vm.state.collectAsState()
+
+    InfoAnimeScreen(
+        state = state,
+        onBack = onBack,
+        onFavoriteClicked = vm::onFavoriteClicked
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun InfoAnimeScreen(
+    state: Result<Anime>,
+    onBack: () -> Unit,
+    onFavoriteClicked: () -> Unit
 ) {
 
-    val state by vm.state.collectAsState()
-    val infoAnimeState = rememberDetailState(state = state)
+    //val state by vm.state.collectAsState()
+    val infoAnimeState = rememberDetailState(state)
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -76,7 +93,7 @@ fun InfoAnimeScreen(
             floatingActionButton = {
 
                 val favorite = infoAnimeState.anime?.favorite ?: false
-                FloatingActionButton(onClick = { vm.onFavoriteClicked() }) {
+                FloatingActionButton(onClick = { onFavoriteClicked() }) {
                     Icon(
                         imageVector = if(favorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = stringResource(id = R.string.favorite)
