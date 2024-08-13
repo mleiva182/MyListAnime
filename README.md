@@ -22,10 +22,14 @@
 
 ### __MY LIST ANIME SCREENSHOTS__
 
+### Home
 ![Home](app/src/main/res/images/Screenshot_20240813_165404.png)
 
+### Detail
 ![Detail](app/src/main/res/images/Screenshot_20240813_165435.png)
 
+### Detail Favorite Selected
 ![Detail Favorite Selected](app/src/main/res/images/Screenshot_20240813_165444.png)
 
+### Home With Favorites Marked
 ![Home With Favorites Marked](app/src/main/res/images/Screenshot_20240813_165513.png)
