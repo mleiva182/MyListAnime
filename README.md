@@ -19,3 +19,13 @@
 * Unit test useCases, repository, homeViewModel, InfoAnimeViewModel.
 * Integration test for homeViewModel and InfoAnimeViewModel. fakes with buildAnimesRepositoryWith.
 * UI Screen Test in compose with compose Rule(hilt,room,mockwebserver).
+
+### __MY LIST ANIME SCREENSHOTS__
+
+![Home](app/src/main/res/images/Screenshot_20240813_165404.png)
+
+![Detail](app/src/main/res/images/Screenshot_20240813_165435.png)
+
+![Detail Favorite Selected](app/src/main/res/images/Screenshot_20240813_165444.png)
+
+![Home With Favorites Marked](app/src/main/res/images/Screenshot_20240813_165513.png)
